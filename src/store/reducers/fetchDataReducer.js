@@ -6,6 +6,7 @@ const initialState = {
   loginPassword:"",
   user:"",
   error: {},
+  authorised:false,
 };
 
 const fetchDataReducer = (state = initialState, action) => {
@@ -36,6 +37,7 @@ const fetchDataReducer = (state = initialState, action) => {
         loading: false,
         user: action.payload,
         error: {},
+        authorised:true,
       };
     case types.LOGIN_DATA_FAILURE:
       return {
@@ -55,8 +57,28 @@ const fetchDataReducer = (state = initialState, action) => {
         loading: false,
         //user: action.payload,
         error: {},
+        authorised:true,
       };
     case types.REGISTER_DATA_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        //user: {},
+        error: action.error,
+      };
+      case types.HANDLEME_SEND_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.HANDLEME_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        //user: action.payload,
+        error: {},
+      };
+    case types.HANDLEME_FAILURE:
       return {
         ...state,
         loading: false,

@@ -4,6 +4,7 @@ import { registerData, handleInputChangeInRedux,
 handleInput1ChangeInRedux,
 handleInput2ChangeInRedux} from "../../../store/actions";
 import { connect } from "react-redux";
+import img from '../../AppContainer/1.png';
 const Signup = (props) => {
   function handleRegisterData() {
     props.registerData(props.login);
@@ -11,8 +12,15 @@ const Signup = (props) => {
   }
 
   return (
-    <div>
-      <input
+    <div>{props.login.loading?<div className="loader"></div>:<div className="boxform">
+<div className="left">
+  <div className="overlay">
+<img className="img" src={img}/>
+</div></div>  
+  <div className="right">
+  <h5>Signup</h5>
+  <div className='inputs'>
+  <input
           value={props.login.name}
           placeholder="Enter name"
           onChange={(e) => props.handleInputChangeInRedux(e.target.value)}
@@ -32,15 +40,19 @@ const Signup = (props) => {
           placeholder="Enter password"
           onChange={(e) => props.handleInput2ChangeInRedux(e.target.value)}
         />
+  </div>
+
         <br></br>
         <br></br>
         <button onClick={handleRegisterData}>
           Submit
         </button>
-        <button><Link to="/">Signin</Link>
+        {/* <button><Link to="/">Signin</Link>
            
-        </button>
+        </button> */}
 
+      </div>
+      </div>}
       </div>
     
   );

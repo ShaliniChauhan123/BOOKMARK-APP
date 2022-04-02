@@ -1,52 +1,51 @@
-export const fetchApi = async (payload) => {
-    try {
 
-        const url =`${process.env.REACT_APP_BOOKMARK_API}/login`;
-        const data={
-            email:payload.loginEmailid,
-            password:payload.loginPassword,
-        }
+export const fetchApi = async (configObj) => {
+  try {
 
-        fetch(url, {
-          method: 'POST', 
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          return data;
-        })
-    
-    } catch (e) {
-      console.log(e);
-    }
+    var url=`${process.env.REACT_APP_BOOKMARK_API}`;
+if(configObj.endpoint){
+       url=`${process.env.REACT_APP_BOOKMARK_API}${configObj.endpoint}`;}
+     if(configObj.authorization){
+       var headers={
+        'Authorization':configObj.authorization,
+        'Content-Type': 'application/json',
+      }
+     }
+     else{
+       headers={
+        
+          'Content-Type': 'application/json',
+        
+       }
+     }
+     const requestOptions = {
+      method:configObj.method,
+      headers:headers,
   };
-  export const fetchApi1 = async (payload) => {
-    try {
-
-        const url =`${process.env.REACT_APP_BOOKMARK_API}/register`;
-        const data={
-            name:payload.name,
-            email:payload.loginEmailid,
-            password:payload.loginPassword,
-        }
-
-     fetch(url, {
-          method: 'POST', 
-          body: JSON.stringify(data),
-          headers: {"Content-type": "application/json"
-        }
-        })
-        .then(response => response.json())
-        .then(res => {
-          console.log('Success:', res);
-          return res;
-        })
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  
+  if (configObj.data) {
+      //requestOptions.headers['Content-Type'] = 'application/json';
+      requestOptions.body = JSON.stringify(configObj.data);
+  }
+      
+   let response=  await fetch(url,requestOptions
+    //  {
+    //     method: configObj.method, 
+    //     headers: headers,
+    //     body: JSON.stringify(configObj.data),
+    //   }
+      )
+      console.log('Success:', response);
+      if(response.status!=200){
+        throw response.statusText;
+      }
+      //.then(response => response.json())
+      // .then(data => {
+      //   console.log('Success:', data);
+      //   return data;
+      // })
+  return response ;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};

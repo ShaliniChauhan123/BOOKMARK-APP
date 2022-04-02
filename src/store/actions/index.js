@@ -56,3 +56,28 @@ export function registerDataFailure(error) {
       error: error,
     };
   }
+  export function handleMeapi() {
+    return {
+      type: types.HANDLEME_SEND_REQUEST,
+      
+    };
+  }
+  export function handleme_Success(user) {
+    return {
+      type: types.HANDLEME_SUCCESS,
+      payload: user,
+    };
+  }
+export function handleme_Failure(error) {
+  return {
+    type: types.HANDLEME_FAILURE,
+    payload: {},
+    error: error,
+  };
+}
+
+
+
+
+
+

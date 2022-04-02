@@ -1,5 +1,6 @@
 {
   "name": "bookmark_reactapp",
+  "main" : "dist/cjs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,6 +8,8 @@
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "form-data": "^4.0.0",
+    "module_name": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
