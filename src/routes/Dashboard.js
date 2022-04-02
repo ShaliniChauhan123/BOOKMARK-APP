@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, Navigate,useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { handleMeapi} from "../store/actions";
 import { connect } from "react-redux";
 const Dashboard = (props) => {
