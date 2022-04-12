@@ -1,27 +1,27 @@
 import { types } from "../actionTypes";
 const initialState = {
   loading: false,
-  name:"",
+  name: "",
   loginEmailid: "",
-  loginPassword:"",
-  user:"",
+  loginPassword: "",
+  user: "",
   error: {},
-  authorised:false,
+  authorised: false,
 };
 
 const fetchDataReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.HANDLE:
-        return {
-          ...state,
-          name: action.payload,
-        };
+      return {
+        ...state,
+        name: action.payload,
+      };
     case types.HANDLE1:
       return {
         ...state,
         loginEmailid: action.payload,
       };
-      case types.HANDLE2:
+    case types.HANDLE2:
       return {
         ...state,
         loginPassword: action.payload,
@@ -35,9 +35,10 @@ const fetchDataReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        name: action.payload.name,
         user: action.payload,
         error: {},
-        authorised:true,
+        authorised: true,
       };
     case types.LOGIN_DATA_FAILURE:
       return {
@@ -46,7 +47,7 @@ const fetchDataReducer = (state = initialState, action) => {
         user: {},
         error: action.error,
       };
-      case types.REGISTER_DATA_SEND_REQUEST:
+    case types.REGISTER_DATA_SEND_REQUEST:
       return {
         ...state,
         loading: true,
@@ -55,18 +56,17 @@ const fetchDataReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        //user: action.payload,
+        user: action.payload,
         error: {},
-        authorised:true,
+        authorised: true,
       };
     case types.REGISTER_DATA_FAILURE:
       return {
         ...state,
         loading: false,
-        //user: {},
         error: action.error,
       };
-      case types.HANDLEME_SEND_REQUEST:
+    case types.HANDLEME_SEND_REQUEST:
       return {
         ...state,
         loading: true,
@@ -75,14 +75,13 @@ const fetchDataReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        //user: action.payload,
+        name: action.payload,
         error: {},
       };
     case types.HANDLEME_FAILURE:
       return {
         ...state,
         loading: false,
-        //user: {},
         error: action.error,
       };
     default:

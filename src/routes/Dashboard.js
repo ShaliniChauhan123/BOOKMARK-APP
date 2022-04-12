@@ -1,23 +1,14 @@
 import React, { useEffect } from "react";
-import { useHistory } from 'react-router-dom';
-import { handleMeapi} from "../store/actions";
+import { Navigate, useNavigate } from "react-router-dom";
+import { handleMeapi } from "../store/actions";
 import { connect } from "react-redux";
+
 const Dashboard = (props) => {
-  useEffect(()=>{
-    props.handleMeapi()
-  },[])
-  const history=useHistory()
-  // if(!props.login.authorised)
-  // {
-  //   return <Navigate to="/" />
-  // }
-  return (
-    <div>jjjj
-      click me 
-     {/* ooo{props.handleMeapi} */}
-      </div>
-    
-  );
+  useEffect(() => {
+    props.handleMeapi(navigate);
+  }, []);
+  const navigate = useNavigate();
+  return <div>jjjj click me hiiiiii......... {props.login.name}</div>;
 };
 const mapStateToProps = (store) => {
   return {
@@ -27,9 +18,9 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleMeapi: () => {
-        dispatch(handleMeapi());
-      },
+    handleMeapi: (val) => {
+      dispatch(handleMeapi(val));
+    },
   };
 };
 

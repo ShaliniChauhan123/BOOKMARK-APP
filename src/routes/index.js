@@ -1,28 +1,35 @@
-import { BrowserRouter as Router, Route, Routes,Redirect } from "react-router-dom";
-import Signin from "../containers/AppContainer/Signin";
-import Signup from "../containers/AppContainer/Signup";
-import PageNotFound from "./PageNotFound";
+import React from "react";
+import Signup from "../containers/AppContainer/components/Signup";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ProtectedRoutes from "./ProtectedRoutes";
+import Signin from "../containers/AppContainer/components/Signin";
 import Dashboard from "./Dashboard";
-//import { isTokensPresentLocalStorage } from "../utils/tokenHelpers";
-const AppRoutes = () => {
-  
-  return (
 
+const AppRoutes = (props) => {
+  return (
     <Router>
       <Routes>
-
-      
-      
-
-        <Route path="/" exact={true} element={<Signin />} />
+        <Route index element={<Signin />} />
+        <Route path="/" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="*" element={<PageNotFound />} />
-
-
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoutes authorised={props.login.authorised}>
+              <Dashboard />
+            </ProtectedRoutes>
+          }
+        />
       </Routes>
     </Router>
-    
   );
 };
-export default AppRoutes;
+
+const mapStateToProps = (store) => {
+  return {
+    login: store.fetchDataReducer,
+  };
+};
+
+export default connect(mapStateToProps, null)(AppRoutes);
