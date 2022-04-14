@@ -30,7 +30,7 @@ const Input = (props) => {
 };
 const mapStateToProps = (store) => {
   return {
-    login: store.fetchDataReducer,
+    login: store.bookmarkAppReducer,
   };
 };
 

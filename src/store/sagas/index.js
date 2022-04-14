@@ -1,5 +1,5 @@
 import { all } from "redux-saga/effects";
-import { watchFetchDataSaga } from "./fetchDataSaga";
+import { watchBookmarkAppSaga } from "./bookmarkAppSaga";
 export default function* RootSaga() {
-  yield all([watchFetchDataSaga()]);
+  yield all([watchBookmarkAppSaga()]);
 }

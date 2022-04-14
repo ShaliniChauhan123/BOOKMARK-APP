@@ -8,9 +8,11 @@ import {
   registerDataFailure,
   handleme_Success,
   handleme_Failure,
+  handleFolderApi_Success,
+  handleFolderApi_Failure,
 } from "../actions";
 
-function* loginFetchRequest(action) {
+function* loginRequest(action) {
   try {
     let configObj = {
       method: "POST",
@@ -31,7 +33,7 @@ function* loginFetchRequest(action) {
     yield put(loginDataFailure(error));
   }
 }
-function* registerFetchRequest1(action) {
+function* registerRequest(action) {
   try {
     let configObj = {
       method: "POST",
@@ -52,27 +54,40 @@ function* registerFetchRequest1(action) {
   }
 }
 
-function* meFetchRequest2(action) {
+function* meRequest(action) {
   try {
     let configObj = {
-      method: "POST",
+      method: "GET",
       endpoint: "/me",
       authorization: `Bearer ${localStorage.getItem("token")}`,
     };
     const user = yield call(fetchApi, configObj);
-    yield put(handleme_Success(user));
+    yield put(handleme_Success(user.name));
   } catch (error) {
     console.log(error);
     yield put(handleme_Failure(error));
-    const user = {
-      name: "ishalini",
-    };
-
-    yield put(handleme_Success(user.name));
   }
 }
-export function* watchFetchDataSaga() {
-  yield takeLatest(types.LOGIN_DATA_SEND_REQUEST, loginFetchRequest);
-  yield takeLatest(types.REGISTER_DATA_SEND_REQUEST, registerFetchRequest1);
-  yield takeLatest(types.HANDLEME_SEND_REQUEST, meFetchRequest2);
+function* createFolderRequest(action) {
+  try {
+    let configObj = {
+      method: "POST",
+      endpoint: "/folder",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+      data: {
+        name: action.payload,
+      },
+    };
+    const user = yield call(fetchApi, configObj);
+    yield put(handleFolderApi_Success(user));
+  } catch (error) {
+    console.log(error);
+    yield put(handleFolderApi_Failure(error));
+  }
+}
+export function* watchBookmarkAppSaga() {
+  yield takeLatest(types.LOGIN_DATA_SEND_REQUEST, loginRequest);
+  yield takeLatest(types.REGISTER_DATA_SEND_REQUEST, registerRequest);
+  yield takeLatest(types.HANDLEME_SEND_REQUEST, meRequest);
+  yield takeLatest(types.CREATE_FOLDER_API_SEND_REQUEST, createFolderRequest);
 }

@@ -58,7 +58,7 @@ export function registerDataFailure(error) {
     error: error,
   };
 }
-export function handleMeapi(val) {
+export function handleMeapi() {
   return {
     type: types.HANDLEME_SEND_REQUEST,
   };
@@ -73,6 +73,30 @@ export function handleme_Failure(error) {
   return {
     type: types.HANDLEME_FAILURE,
     payload: {},
+    error: error,
+  };
+}
+export function handleFolderNameChangeInRedux(val) {
+  return {
+    type: types.HANDLE_FOLDER_NAME,
+    payload: val,
+  };
+}
+export function handleFolderApi(val) {
+  return {
+    type: types.CREATE_FOLDER_API_SEND_REQUEST,
+    payload: val,
+  };
+}
+export function handleFolderApi_Success(folder) {
+  return {
+    type: types.CREATE_FOLDER_API_SUCCESS,
+    payload: folder,
+  };
+}
+export function handleFolderApi_Failure(error) {
+  return {
+    type: types.CREATE_FOLDER_API_FAILURE,
     error: error,
   };
 }

@@ -1,9 +1,10 @@
 import React from "react";
 import { registerData } from "../../../../store/actions";
 import { connect } from "react-redux";
-import img from "../../../AppContainer/components/sharedcomponents/1.png";
+import img from "../../../AppContainer/components/sharedcomponents/image.svg";
 import InputName from "../sharedcomponents/inputName";
 import Input from "../sharedcomponents/inputfield";
+import gluelabs from "../sharedcomponents/gluelabs.svg";
 import { useNavigate } from "react-router-dom";
 
 const Signup = (props) => {
@@ -23,7 +24,11 @@ const Signup = (props) => {
             </div>
           </div>
           <div className="right">
-            <h5>Signup</h5>
+            <h5>
+              <img src={gluelabs} />
+            </h5>
+
+            <h4>Signup</h4>
             <InputName />
             <Input />
             <br></br>
@@ -38,7 +43,7 @@ const Signup = (props) => {
 
 const mapStateToProps = (store) => {
   return {
-    login: store.fetchDataReducer,
+    login: store.bookmarkAppReducer,
   };
 };
 

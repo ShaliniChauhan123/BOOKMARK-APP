@@ -1,15 +1,15 @@
 .boxform {
   /* margin: 0 auto; */
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   background: #ffffff;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   overflow: hidden;
   display: flex;
   flex: 1 1 100%;
   align-items: stretch;
-  justify-content: space-between;
-  box-shadow: 0 0 20px 6px #090b6f85;
+  justify-content: center;
+  /* box-shadow: 0 0 20px 6px #090b6f85; */
 }
 @media (max-width: 980px) {
   .boxform {
@@ -25,17 +25,24 @@
 @media (max-width: 980px) {
   .right {
     width: 100%;
+    padding-top: 0px;
   }
 }
 .img {
   width: 400px;
   height: 550px;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
 }
 
 @media (max-width: 480px) {
   .img {
     width: 220px;
-    height: 120px;
+    height: 220px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
   }
 }
 @media (min-width: 1200px) {
@@ -61,12 +68,13 @@
   /* padding: 30px; */
   width: 100%;
   height: 100%;
-  background: #5961f9ad;
+  /* background: #5961f9ad; */
   overflow: hidden;
   box-sizing: border-box;
 }
 .right {
   padding: 40px;
+  padding-top: 0px;
   overflow: hidden;
 }
 .inputs {
@@ -151,12 +159,12 @@ button {
   cursor: pointer;
   color: #fff;
   font-size: 16px;
-  padding: 12px 35px;
+  padding: 12px 20px;
   border-radius: 50px;
   display: inline-block;
   border: 0;
   outline: 0;
-  box-shadow: 0px 4px 20px 0px #2b28c6;
+  /* box-shadow: 0px 4px 20px 0px #2b28c6; */
   background-image: linear-gradient(135deg, #2b28c6 10%, #2b28c6 100%);
 }
 

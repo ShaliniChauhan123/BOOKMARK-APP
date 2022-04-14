@@ -5,11 +5,12 @@ const initialState = {
   loginEmailid: "",
   loginPassword: "",
   user: "",
+  foldername: "",
   error: {},
   authorised: false,
 };
 
-const fetchDataReducer = (state = initialState, action) => {
+const bookmarkAppReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.HANDLE:
       return {
@@ -25,6 +26,11 @@ const fetchDataReducer = (state = initialState, action) => {
       return {
         ...state,
         loginPassword: action.payload,
+      };
+    case types.HANDLE_FOLDER_NAME:
+      return {
+        ...state,
+        foldername: action.payload,
       };
     case types.LOGIN_DATA_SEND_REQUEST:
       return {
@@ -84,8 +90,25 @@ const fetchDataReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case types.CREATE_FOLDER_API_SEND_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.CREATE_FOLDER_API_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        createfolder: action.payload,
+      };
+    case types.HANDLEME_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     default:
       return state;
   }
 };
-export default fetchDataReducer;
+export default bookmarkAppReducer;

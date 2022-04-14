@@ -3,14 +3,18 @@ import React from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { loginData } from "../../../../store/actions";
 import { connect } from "react-redux";
-import img from "../../../AppContainer/components/sharedcomponents/1.png";
+import img from "../../../AppContainer/components/sharedcomponents/image.svg";
+import gluelabs from "../sharedcomponents/gluelabs.svg";
 import Input from "../sharedcomponents/inputfield";
 
 const Signin = (props) => {
   const navigate = useNavigate();
-  function handleLoginData() {
+  function handleLoginData(e) {
+    e.preventDefault();
     props.loginData(props.login, navigate);
   }
+
+  props.login.authorised ? <Navigate to="/dashboard" /> : <Navigate to="/" />;
 
   return (
     <div>
@@ -24,7 +28,10 @@ const Signin = (props) => {
             </div>
           </div>
           <div className="right">
-            <h5>Login</h5>
+            <h5>
+              <img src={gluelabs} />
+            </h5>
+
             <p>
               Don't have an account?{" "}
               <Link to="/signup">Create Your Account</Link> it takes less than a
@@ -36,7 +43,9 @@ const Signin = (props) => {
               disabled={
                 !(props.login.loginEmailid && props.login.loginPassword)
               }
-              onClick={handleLoginData}
+              onClick={(e) => {
+                handleLoginData(e);
+              }}
             >
               Signin
             </button>
@@ -48,7 +57,7 @@ const Signin = (props) => {
 };
 const mapStateToProps = (store) => {
   return {
-    login: store.fetchDataReducer,
+    login: store.bookmarkAppReducer,
   };
 };
 

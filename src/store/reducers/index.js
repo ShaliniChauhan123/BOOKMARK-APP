@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import fetchDataReducer from "./fetchDataReducer";
+import bookmarkAppReducer from "./bookmarkAppReducer";
 const RootReducer = combineReducers({
-  fetchDataReducer,
+  bookmarkAppReducer,
 });
 export default RootReducer;
