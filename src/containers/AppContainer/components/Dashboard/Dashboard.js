@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
-import { handleMeapi } from "../../../../store/actions";
+import { handleMeapi, getFoldersApi } from "../../../../store/actions";
 import { connect } from "react-redux";
 import "./dashboardstyles.css";
 import PopUp from "./PopUp";
+import linkimage from "./mainuplinkimage.svg";
+import threedots from "./threedots.svg";
 
 const Dashboard = (props) => {
   useEffect(() => {
     props.handleMeapi();
+    props.getFoldersApi();
   }, []);
   const navigate = useNavigate();
   const [seen, setSeen] = useState(false);
@@ -19,6 +22,7 @@ const Dashboard = (props) => {
   };
   const routechangelinks = () => {
     navigate("/links");
+
     setClicklink(true);
     setClickimage(false);
     setClicktext(false);
@@ -61,6 +65,26 @@ const Dashboard = (props) => {
             </button>
           </li>
           {seen ? <PopUp toggle={togglePop} /> : null}
+          <li className="sidenav2">
+            <table>
+              <tbody>
+                <tr>
+                  <td>Folders</td>
+                  <td>
+                    <img onClick={togglePop} src={threedots} />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <br></br>
+            {props.getfoldersname.map((i) => (
+              <>
+                {i.name}
+                <br></br>
+              </>
+            ))}
+          </li>
         </div>
         <div className="right1">
           <div className="header">
@@ -69,19 +93,19 @@ const Dashboard = (props) => {
                 <tr>
                   <td
                     onClick={routechangelinks}
-                    className={clicklink ? "nounderline" : "underline"}
+                    className={clicklink ? "underline" : "nounderline"}
                   >
                     Links
                   </td>
                   <td
                     onClick={routechangeimages}
-                    className={clickimage ? "nounderline" : "underline"}
+                    className={clickimage ? "underline" : "nounderline"}
                   >
                     Images
                   </td>
                   <td
                     onClick={routechangetext}
-                    className={clicktext ? "nounderline" : "underline"}
+                    className={clicktext ? "underline" : "nounderline"}
                   >
                     Text
                   </td>
@@ -90,13 +114,64 @@ const Dashboard = (props) => {
             </table>
           </div>
           <div className="main">
-            <div className="mainup"></div>
-            <div className="maindown"></div>
+            {clicklink ? (
+              <div>
+                <div className="mainup">
+                  <div className="mainuplink">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <h3>Add Quick Link</h3>
+                          </td>
+                          <td rowSpan={5}>
+                            <img
+                              className="movelinkimageright"
+                              src={linkimage}
+                            />
+                          </td>
+                        </tr>
+                        <tr className="rowpadding">
+                          <td className="white">URL</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <input
+                              className="rounded"
+                              placeholder="Enter password"
+                              // onChange={(e) => props.handleInputQuickLink(e.target.value)}
+                            />
+                          </td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td className="white">Folder</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <input
+                              className="shortrounded"
+                              placeholder="Enter password"
+                              // onChange={(e) => props.handleInputQuickLink(e.target.value)}
+                            />
+                          </td>
+                          <td className="white">SaveS</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div className="maindown"></div>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
           <div className="footer"></div>
         </div>
       </div>
-      jjjj click me hiiiiii......... {props.name}
       <button>
         <Link to="/">login</Link>
       </button>
@@ -106,6 +181,7 @@ const Dashboard = (props) => {
 const mapStateToProps = (store) => {
   return {
     name: store.bookmarkAppReducer.name,
+    getfoldersname: store.bookmarkAppReducer.getfolders,
   };
 };
 
@@ -113,6 +189,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleMeapi: () => {
       dispatch(handleMeapi());
+    },
+    getFoldersApi: () => {
+      dispatch(getFoldersApi());
     },
   };
 };

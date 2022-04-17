@@ -8,6 +8,7 @@ const initialState = {
   foldername: "",
   error: {},
   authorised: false,
+  getfolders: [],
 };
 
 const bookmarkAppReducer = (state = initialState, action) => {
@@ -101,7 +102,24 @@ const bookmarkAppReducer = (state = initialState, action) => {
         loading: false,
         createfolder: action.payload,
       };
-    case types.HANDLEME_FAILURE:
+    case types.CREATE_FOLDER_API_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case types.GET_FOLDERS_API_SEND_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.GET_FOLDERS_API_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        getfolders: action.payload,
+      };
+    case types.GET_FOLDERS_API_FAILURE:
       return {
         ...state,
         loading: false,

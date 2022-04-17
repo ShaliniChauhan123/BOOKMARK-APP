@@ -10,6 +10,8 @@ import {
   handleme_Failure,
   handleFolderApi_Success,
   handleFolderApi_Failure,
+  getFoldersApi_Success,
+  getFoldersApi_Failure,
 } from "../actions";
 
 function* loginRequest(action) {
@@ -85,9 +87,26 @@ function* createFolderRequest(action) {
     yield put(handleFolderApi_Failure(error));
   }
 }
+function* getFolderRequest(action) {
+  try {
+    //let folderid = "81da60eb-bba2-43b2-9cae-7c2e99ce1fb0";
+    let configObj = {
+      method: "GET",
+      endpoint: `/folders`,
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    };
+    const user = yield call(fetchApi, configObj);
+    yield put(getFoldersApi_Success(user));
+    console.log("%%%%%", user);
+  } catch (error) {
+    console.log(error);
+    yield put(getFoldersApi_Failure(error));
+  }
+}
 export function* watchBookmarkAppSaga() {
   yield takeLatest(types.LOGIN_DATA_SEND_REQUEST, loginRequest);
   yield takeLatest(types.REGISTER_DATA_SEND_REQUEST, registerRequest);
   yield takeLatest(types.HANDLEME_SEND_REQUEST, meRequest);
   yield takeLatest(types.CREATE_FOLDER_API_SEND_REQUEST, createFolderRequest);
+  yield takeLatest(types.GET_FOLDERS_API_SEND_REQUEST, getFolderRequest);
 }

@@ -7,6 +7,7 @@ const InputName = (props) => {
     <div>
       <div className="inputs">
         <input
+          className="inputForAuth"
           value={props.login.name}
           placeholder="Enter name"
           onChange={(e) => props.handleInputChangeInRedux(e.target.value)}

@@ -11,6 +11,7 @@ const Input = (props) => {
     <div>
       <div className="inputs">
         <input
+          className="inputForAuth"
           value={props.login.emailId}
           placeholder="Enter emailid"
           onChange={(e) => props.handleInput1ChangeInRedux(e.target.value)}
@@ -18,6 +19,7 @@ const Input = (props) => {
         <br></br>
         <br></br>
         <input
+          className="inputForAuth"
           value={props.login.password}
           placeholder="Enter password"
           onChange={(e) => props.handleInput2ChangeInRedux(e.target.value)}

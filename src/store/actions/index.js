@@ -100,3 +100,21 @@ export function handleFolderApi_Failure(error) {
     error: error,
   };
 }
+export function getFoldersApi() {
+  return {
+    type: types.GET_FOLDERS_API_SEND_REQUEST,
+  };
+}
+export function getFoldersApi_Success(user) {
+  return {
+    type: types.GET_FOLDERS_API_SUCCESS,
+    payload: user,
+  };
+}
+export function getFoldersApi_Failure(error) {
+  return {
+    type: types.GET_FOLDERS_API_FAILURE,
+    payload: {},
+    error: error,
+  };
+}
