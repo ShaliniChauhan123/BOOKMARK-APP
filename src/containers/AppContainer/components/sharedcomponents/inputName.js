@@ -1,6 +1,5 @@
 import React from "react";
-import { handleInputChangeInRedux } from "../../../../store/actions";
-import { connect } from "react-redux";
+import Input from "./inputfield";
 
 const InputName = (props) => {
   return (
@@ -8,28 +7,21 @@ const InputName = (props) => {
       <div className="inputs">
         <input
           className="inputForAuth"
-          value={props.login.name}
+          value={props.input}
           placeholder="Enter name"
-          onChange={(e) => props.handleInputChangeInRedux(e.target.value)}
+          onChange={props.handleState}
         />
-        <br></br>
-        <br></br>
+        {/* <br></br>
+        <br></br> */}
+        <Input
+          input1={props.input1}
+          input2={props.input2}
+          handleState1={props.handleState1}
+          handleState2={props.handleState2}
+        />
       </div>
     </div>
   );
 };
-const mapStateToProps = (store) => {
-  return {
-    login: store.bookmarkAppReducer,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleInputChangeInRedux: (val) => {
-      dispatch(handleInputChangeInRedux(val));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(InputName);
+export default InputName;

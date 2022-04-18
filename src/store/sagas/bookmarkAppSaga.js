@@ -20,8 +20,8 @@ function* loginRequest(action) {
       method: "POST",
       endpoint: "/login",
       data: {
-        email: action.payload.loginEmailid,
-        password: action.payload.loginPassword,
+        email: action.payload1,
+        password: action.payload2,
       },
     };
     const user = yield call(fetchApi, configObj);
@@ -41,9 +41,9 @@ function* registerRequest(action) {
       method: "POST",
       endpoint: "/register",
       data: {
-        name: action.payload.name,
-        email: action.payload.loginEmailid,
-        password: action.payload.loginPassword,
+        name: action.payload1,
+        email: action.payload2,
+        password: action.payload3,
       },
     };
     const user = yield call(fetchApi, configObj);

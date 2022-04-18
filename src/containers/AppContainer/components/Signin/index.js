@@ -1,5 +1,5 @@
 import "../../../AppContainer/components/sharedcomponents/styles.css";
-import React from "react";
+import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { loginData } from "../../../../store/actions";
 import { connect } from "react-redux";
@@ -8,14 +8,22 @@ import gluelabs from "../sharedcomponents/gluelabs.svg";
 import Input from "../sharedcomponents/inputfield";
 
 const Signin = (props) => {
+  const [input1, setInput1] = useState("");
+  const [input2, setInput2] = useState("");
   const navigate = useNavigate();
   function handleLoginData(e) {
     e.preventDefault();
-    props.loginData(props.login, navigate);
+    props.loginData(input1, input2, navigate);
   }
 
   props.login.authorised ? <Navigate to="/dashboard" /> : <Navigate to="/" />;
 
+  const handleState1 = (e) => {
+    setInput1(e.target.value);
+  };
+  const handleState2 = (e) => {
+    setInput2(e.target.value);
+  };
   return (
     <div>
       {props.login.loading ? (
@@ -32,17 +40,21 @@ const Signin = (props) => {
               <img src={gluelabs} />
             </h5>
 
+            <Input
+              input1={input1}
+              input2={input2}
+              handleState1={handleState1}
+              handleState2={handleState2}
+            />
+
             <p>
               Don't have an account?{" "}
               <Link to="/signup">Create Your Account</Link> it takes less than a
               minute
             </p>
-            <Input />
 
             <button
-              disabled={
-                !(props.login.loginEmailid && props.login.loginPassword)
-              }
+              disabled={!(input1 && input2)}
               onClick={(e) => {
                 handleLoginData(e);
               }}
@@ -63,8 +75,8 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginData: (val, navigate) => {
-      dispatch(loginData(val, navigate));
+    loginData: (val1, val2, navigate) => {
+      dispatch(loginData(val1, val2, navigate));
     },
   };
 };

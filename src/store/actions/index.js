@@ -18,17 +18,20 @@ export function handleInput2ChangeInRedux(val) {
     payload: val,
   };
 }
-export function loginData(val, navigate) {
+export function loginData(val1, val2, navigate) {
   return {
     type: types.LOGIN_DATA_SEND_REQUEST,
-    payload: val,
+    payload1: val1,
+    payload2: val2,
     navigate: navigate,
   };
 }
-export function registerData(val, navigate) {
+export function registerData(val1, val2, val3, navigate) {
   return {
     type: types.REGISTER_DATA_SEND_REQUEST,
-    payload: val,
+    payload1: val1,
+    payload2: val2,
+    payload3: val3,
     navigate: navigate,
   };
 }
