@@ -12,6 +12,7 @@ const Dashboard = (props) => {
     props.handleMeapi();
     props.getFoldersApi();
   }, []);
+
   const navigate = useNavigate();
   const [seen, setSeen] = useState(false);
   const [clicklink, setClicklink] = useState(false);
@@ -21,14 +22,14 @@ const Dashboard = (props) => {
     setSeen(!seen);
   };
   const routechangelinks = () => {
-    navigate("/links");
+    navigate("/dashboard/links");
 
     setClicklink(true);
     setClickimage(false);
     setClicktext(false);
   };
   const routechangeimages = () => {
-    navigate("/images");
+    navigate("/dashboard/images");
     setClicklink(false);
     setClickimage(true);
     setClicktext(false);
@@ -78,9 +79,13 @@ const Dashboard = (props) => {
             </table>
 
             <br></br>
+            {props.name}
+
             {props.getfoldersname.map((i) => (
               <>
                 {i.name}
+
+                {console.log("!!!checking", i.name)}
                 <br></br>
               </>
             ))}
