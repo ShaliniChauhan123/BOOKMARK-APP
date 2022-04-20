@@ -13,7 +13,6 @@ import {
   TEXT_ROUTE,
 } from "../../utils/routeConstants";
 import Button from "../../components/sharedcomponents/Button";
-import SubFolderPopUp from "./SubFolderPopUp";
 
 const Dashboard = (props) => {
   useEffect(() => {

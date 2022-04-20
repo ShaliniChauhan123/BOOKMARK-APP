@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import Button from "../../../components/sharedcomponents/Button";
 import { handleFolderApi } from "../../../store/actions";
 import "../popUpstyles.css";
 import Input from "../../../components/sharedcomponents/Input";
