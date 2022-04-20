@@ -1,6 +1,6 @@
 import "../../components/sharedcomponents/styles.css";
 import React, { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginData } from "../../store/actions";
 import { connect } from "react-redux";
 import Input from "../../components/sharedcomponents/Input";
