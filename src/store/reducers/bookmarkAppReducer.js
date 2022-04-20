@@ -28,11 +28,11 @@ const bookmarkAppReducer = (state = initialState, action) => {
         ...state,
         loginPassword: action.payload,
       };
-    case types.HANDLE_FOLDER_NAME:
-      return {
-        ...state,
-        foldername: action.payload,
-      };
+    // case types.HANDLE_FOLDER_NAME:
+    //   return {
+    //     ...state,
+    //     foldername: action.payload,
+    //   };
     case types.LOGIN_DATA_SEND_REQUEST:
       return {
         ...state,

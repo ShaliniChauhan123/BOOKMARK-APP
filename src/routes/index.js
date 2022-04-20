@@ -5,19 +5,17 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-
 import Root from "./Root";
 import {
   DASHBOARD_ROUTE,
-  IMAGES_ROUTE,
-  LINKS_ROUTE,
   LOGIN_ROUTE,
   REGISTER_ROUTE,
   ROOT_ROUTE,
 } from "../utils/routeConstants";
-import Signup from "../containers/AppContainer/components/Signup";
-import SignIn from "../containers/AppContainer/components/Signin";
-import Dashboard from "../containers/AppContainer/components/Dashboard/Dashboard";
+import Signup from "./Signup";
+import SignIn from "./Signin";
+import Dashboard from "./Dashboard";
+import Template from "../components/sharedcomponents/AuthTemplate";
 
 const PublicRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -38,7 +36,7 @@ const AppRoutes = () => {
           path={LOGIN_ROUTE}
           element={
             <PublicRoute>
-              <SignIn />
+              <Template children={<SignIn />} />
             </PublicRoute>
           }
         />
@@ -46,7 +44,7 @@ const AppRoutes = () => {
           path={REGISTER_ROUTE}
           element={
             <PublicRoute>
-              <Signup />
+              <Template children={<Signup />} />
             </PublicRoute>
           }
         />
@@ -59,15 +57,7 @@ const AppRoutes = () => {
           }
         >
           <Route
-            path={LINKS_ROUTE}
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          ></Route>
-          <Route
-            path={IMAGES_ROUTE}
+            path={`${DASHBOARD_ROUTE}/:id`}
             element={
               <PrivateRoute>
                 <Dashboard />

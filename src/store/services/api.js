@@ -25,7 +25,7 @@ export const fetchApi = async (configObj) => {
     let response = await fetch(url, requestOptions);
     console.log("Success:", response);
 
-    if (response.status != 200) {
+    if (response.status !== 200) {
       throw response.statusText;
     }
     let response1 = await fetch(url, requestOptions)

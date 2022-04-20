@@ -78,6 +78,7 @@ function* createFolderRequest(action) {
       authorization: `Bearer ${localStorage.getItem("token")}`,
       data: {
         name: action.payload,
+        parentId: action.pid,
       },
     };
     const user = yield call(fetchApi, configObj);

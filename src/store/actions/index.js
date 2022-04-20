@@ -79,16 +79,17 @@ export function handleme_Failure(error) {
     error: error,
   };
 }
-export function handleFolderNameChangeInRedux(val) {
-  return {
-    type: types.HANDLE_FOLDER_NAME,
-    payload: val,
-  };
-}
-export function handleFolderApi(val) {
+// export function handleFolderNameChangeInRedux(val) {
+//   return {
+//     type: types.HANDLE_FOLDER_NAME,
+//     payload: val,
+//   };
+// }
+export function handleFolderApi(val, pid) {
   return {
     type: types.CREATE_FOLDER_API_SEND_REQUEST,
     payload: val,
+    pid: pid,
   };
 }
 export function handleFolderApi_Success(folder) {
