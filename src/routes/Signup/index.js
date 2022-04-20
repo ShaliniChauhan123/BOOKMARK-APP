@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { registerData } from "../../store/actions";
 import { connect } from "react-redux";
 import Input from "../../components/sharedcomponents/Input";
+import { useNavigate } from "react-router-dom";
 import "../../components/sharedcomponents/styles.css";
 import Button from "../../components/sharedcomponents/Button";
 
@@ -10,6 +11,7 @@ const Signup = (props) => {
   const [input, setInput] = useState("");
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
+  const navigate = useNavigate();
   function handleRegisterData() {
     props.registerData(input, input1, input2, navigate);
   }
