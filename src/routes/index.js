@@ -15,7 +15,7 @@ import {
 import Signup from "./Signup";
 import SignIn from "./Signin";
 import Dashboard from "./Dashboard";
-import Template from "../components/sharedcomponents/AuthTemplate";
+import Template from "../containers/AuthTemplate";
 
 const PublicRoute = ({ children }) => {
   const token = localStorage.getItem("token");

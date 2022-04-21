@@ -29,33 +29,35 @@ const Signup = (props) => {
       <Input
         className="inputs"
         val={input}
-        placeholder={"Enter your name"}
+        placeholder={"Your Name"}
         onChange={handleState}
       />
       <Input
         className="inputs"
         val={input1}
-        placeholder={"Enter your EmailId"}
+        placeholder={"Email address"}
         onChange={handleState1}
       />
       <Input
         className="inputs"
         val={input2}
-        placeholder={"Enter your Password"}
+        placeholder={"Password"}
         onChange={handleState2}
       />
-
-      <br></br>
       <br></br>
       <Button
+        className="buttonclass"
         disabled={!(input1 && input2)}
         onClick={handleRegisterData}
         buttonName="Submit"
       />
-
-      <p>
+      {/* <p>
         Already have an account?
         <Link to="/"> Login here </Link>
+      </p> */}
+      <p>
+        Already have an account? <Link to="/">Login here </Link>it takes less
+        than a minute
       </p>
     </div>
   );

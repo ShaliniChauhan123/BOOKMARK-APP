@@ -14,9 +14,6 @@ const Signin = (props) => {
     e.preventDefault();
     props.loginData(input1, input2, navigate);
   }
-
-  // props.login.authorised ? <Navigate to="/dashboard" /> : <Navigate to="/" />;
-
   const handleState1 = (e) => {
     setInput1(e.target.value);
   };
@@ -28,27 +25,29 @@ const Signin = (props) => {
       <Input
         className="inputs"
         val={input1}
-        placeholder={"Enter your EmailId"}
+        placeholder={"Email address"}
         onChange={handleState1}
       />
       <Input
         className="inputs"
         val={input2}
-        placeholder={"Enter your Password"}
+        placeholder={"Password"}
         onChange={handleState2}
       />
-
-      <p>
-        Don't have an account? <Link to="/signup">Create Your Account</Link> it
-        takes less than a minute
-      </p>
+      <br></br>
       <Button
+        className="buttonclass"
         disabled={!(input1 && input2)}
         onClick={(e) => {
           handleLoginData(e);
         }}
         buttonName="Signin"
       />
+
+      <p>
+        Don't have an account? <Link to="/signup">Signup here </Link> it takes
+        less than a minute
+      </p>
     </div>
   );
 };

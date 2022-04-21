@@ -66,13 +66,18 @@ button:hover {
 }
 a {
   text-decoration: none;
+  color: blue;
 }
 a:active {
+  color: blue;
+}
+/* a:active {
   text-decoration: underline;
   text-decoration-color: blue;
-  text-decoration-thickness: 5px;
-  padding: 10px 0;
-}
+  /* text-decoration-thickness: 5px; */
+/* padding: 10px 0;
+} */
+
 /* .sidemodal {
   border: 1px solid black;
   position: absolute;

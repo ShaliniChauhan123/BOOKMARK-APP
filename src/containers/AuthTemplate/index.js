@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import img from "../image.svg";
-import gluelabs from "../gluelabs.svg";
-import "../styles.css";
+import img from "../../components/sharedcomponents/image.svg";
+import gluelabs from "../../components/sharedcomponents/gluelabs.svg";
+import "../../components/sharedcomponents/styles.css";
 
 const Template = (props) => {
   const { children } = props;

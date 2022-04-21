@@ -213,7 +213,7 @@ h2 {
   justify-content: center;
   align-items: center; */
   text-decoration: underline;
-  text-decoration-color: blue;
+  /* text-decoration-color: blue; */
   cursor: pointer;
   /* padding: 20px; */
   /* text-decoration-thickness: 5px;
