@@ -12,6 +12,7 @@ import {
   handleFolderApi_Failure,
   getFoldersApi_Success,
   getFoldersApi_Failure,
+  showAppAlert,
 } from "../actions";
 
 function* loginRequest(action) {
@@ -26,13 +27,12 @@ function* loginRequest(action) {
     };
     const user = yield call(fetchApi, configObj);
 
-    console.log("##user", user.token);
     yield put(loginDataSuccess(user));
     localStorage.setItem("token", user.token);
     action.navigate("/dashboard");
   } catch (error) {
-    console.log(error);
-    yield put(loginDataFailure(error));
+    yield put(showAppAlert(error));
+    //yield put(loginDataFailure(error));
   }
 }
 function* registerRequest(action) {
@@ -52,7 +52,8 @@ function* registerRequest(action) {
     action.navigate("/dashboard");
   } catch (error) {
     console.log(error);
-    yield put(registerDataFailure(error));
+    yield put(showAppAlert(error));
+    //yield put(registerDataFailure(error));
   }
 }
 
@@ -67,7 +68,8 @@ function* meRequest(action) {
     yield put(handleme_Success(user.name));
   } catch (error) {
     console.log(error);
-    yield put(handleme_Failure(error));
+    yield put(showAppAlert(error));
+    //yield put(handleme_Failure(error));
   }
 }
 function* createFolderRequest(action) {
@@ -85,7 +87,8 @@ function* createFolderRequest(action) {
     yield put(handleFolderApi_Success(user));
   } catch (error) {
     console.log(error);
-    yield put(handleFolderApi_Failure(error));
+    yield put(showAppAlert(error));
+    //yield put(handleFolderApi_Failure(error));
   }
 }
 function* getFolderRequest(action) {
@@ -101,7 +104,8 @@ function* getFolderRequest(action) {
     console.log("%%%%%", user);
   } catch (error) {
     console.log(error);
-    yield put(getFoldersApi_Failure(error));
+    yield put(showAppAlert(error));
+    //yield put(getFoldersApi_Failure(error));
   }
 }
 export function* watchBookmarkAppSaga() {

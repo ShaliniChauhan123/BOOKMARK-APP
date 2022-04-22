@@ -1,10 +1,12 @@
 import React from "react";
-
 import AppRoutes from "../../routes";
+import AppContainer from "../AppContainer";
 const App = (props) => {
   return (
     <div>
-      <AppRoutes />
+      <AppContainer>
+        <AppRoutes />
+      </AppContainer>
     </div>
   );
 };

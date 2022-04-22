@@ -9,6 +9,10 @@ const initialState = {
   error: {},
   authorised: false,
   getfolders: [],
+  showAlert: false,
+  title: "",
+  message: "",
+  type: "",
 };
 
 const bookmarkAppReducer = (state = initialState, action) => {
@@ -28,14 +32,11 @@ const bookmarkAppReducer = (state = initialState, action) => {
         ...state,
         loginPassword: action.payload,
       };
-    // case types.HANDLE_FOLDER_NAME:
-    //   return {
-    //     ...state,
-    //     foldername: action.payload,
-    //   };
+
     case types.LOGIN_DATA_SEND_REQUEST:
       return {
         ...state,
+        showAlert: false,
         loading: true,
       };
     case types.LOGIN_DATA_SUCCESS:
@@ -53,6 +54,7 @@ const bookmarkAppReducer = (state = initialState, action) => {
         loading: false,
         user: {},
         error: action.error,
+        showAlert: true,
       };
     case types.REGISTER_DATA_SEND_REQUEST:
       return {
@@ -125,6 +127,14 @@ const bookmarkAppReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case types.SHOW_ALERT:
+      return {
+        ...state,
+        loading: false,
+        showAlert: true,
+        message: action.message,
+      };
+
     default:
       return state;
   }

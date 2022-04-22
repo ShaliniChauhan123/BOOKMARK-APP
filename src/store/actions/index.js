@@ -122,3 +122,10 @@ export function getFoldersApi_Failure(error) {
     error: error,
   };
 }
+export function showAppAlert(error) {
+  return {
+    type: types.SHOW_ALERT,
+    payload: {},
+    message: error,
+  };
+}

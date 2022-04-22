@@ -42,7 +42,7 @@ const Dashboard = (props) => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            class="cursor-pointer w-8 h-12"
+            className="cursor-pointer w-8 h-12"
           >
             <path
               strokeLinecap="round"
@@ -105,43 +105,25 @@ const Dashboard = (props) => {
             </div>
           </div>
           <li className="">
-            {/* <p>
-              Folders{" "}
-              <img onClick={toggleSidePop} src={threedots} alt="threedots" />
-            </p>
-            {sidemodal ? <SidePopUp toggle={toggleSidePop} /> : null} */}
-            {/* <table>
-              <tbody>
-                <tr>
-                  <td>Folders</td>
-                  <td>
-                    <img onClick={toggleSidePop} src={threedots} alt="threedots" />
-                  </td>
-                </tr>
-              </tbody>
-            </table> */}
-
             <br></br>
             {props.name}
             <div className="modal1">
               {props.getfoldersname.map((i) => (
-                <>
-                  <div key={i.id} className="modal11">
-                    {i.name}
+                <div key={i.id} className="modal11">
+                  {i.name}
 
-                    <img
-                      className="threedots"
-                      onClick={toggleSidePop}
-                      src={threedots}
-                      alt="threedots"
-                    />
-                    <div className="">
-                      {sidemodal ? (
-                        <SidePopUp key={i.id} toggle={toggleSidePop} />
-                      ) : null}
-                    </div>
+                  <img
+                    className="threedots"
+                    onClick={toggleSidePop}
+                    src={threedots}
+                    alt="threedots"
+                  />
+                  <div className="">
+                    {sidemodal ? (
+                      <SidePopUp key={i.id} toggle={toggleSidePop} />
+                    ) : null}
                   </div>
-                </>
+                </div>
               ))}
             </div>
           </li>

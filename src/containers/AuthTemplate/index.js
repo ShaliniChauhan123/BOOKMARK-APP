@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import img from "../../components/sharedcomponents/image.svg";
 import gluelabs from "../../components/sharedcomponents/gluelabs.svg";
 import "../../components/sharedcomponents/styles.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Template = (props) => {
   const { children } = props;
