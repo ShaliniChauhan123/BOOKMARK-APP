@@ -87,9 +87,11 @@ const Dashboard = (props) => {
           </li>
           <li className="sidenav2">Folders Tags</li>
           <li className="sidenav2">
-            <Button disabled={modal} onClick={togglePop} buttonName={"+"} />
+            <Button disabled={modal} onClick={togglePop} buttonName="+" />
+            // plz check this
+            {modal && <PopUp toggle={togglePop} />}
           </li>
-          {modal ? <PopUp toggle={togglePop} /> : null}
+
           <div className="modal1">
             <div className="modal11">
               Folders

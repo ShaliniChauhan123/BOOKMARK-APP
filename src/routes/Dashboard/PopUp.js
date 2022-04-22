@@ -28,7 +28,6 @@ const PopUp = (props) => {
               placeholder="Enter Folder Name"
               onChange={handleFolderNameChange}
             />
-            {console.log(";;;;", foldername)}
             <Button
               disabled={!foldername}
               onClick={props.handleFolderApi(foldername)}

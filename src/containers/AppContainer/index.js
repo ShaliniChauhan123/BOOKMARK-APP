@@ -13,7 +13,6 @@ const AppContainer = (props) => {
           toastId: customId,
         }) && <ToastContainer />}
       {children}
-      {console.log("checker")}
     </React.Fragment>
   );
 };

@@ -1,5 +1,6 @@
 import "../../components/sharedcomponents/styles.css";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { loginData } from "../../store/actions";
 import { connect } from "react-redux";
@@ -7,43 +8,49 @@ import Input from "../../components/sharedcomponents/Input";
 import Button from "../../components/sharedcomponents/Button";
 
 const Signin = (props) => {
-  const [input1, setInput1] = useState("");
-  const [input2, setInput2] = useState("");
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors, isDirty, isValid },
+  } = useForm({ mode: "onChange" });
   const navigate = useNavigate();
-  function handleLoginData(e) {
-    e.preventDefault();
-    props.loginData(input1, input2, navigate);
-  }
-  const handleState1 = (e) => {
-    setInput1(e.target.value);
-  };
-  const handleState2 = (e) => {
-    setInput2(e.target.value);
+
+  const onSubmit = (data) => {
+    props.loginData(data.email, data.password, navigate);
   };
   return (
     <div>
-      <Input
-        className="inputs"
-        val={input1}
-        placeholder={"Email address"}
-        onChange={handleState1}
-      />
-      <Input
-        className="inputs"
-        val={input2}
-        placeholder={"Password"}
-        onChange={handleState2}
-      />
-      <br></br>
-      <Button
-        className="buttonclass"
-        disabled={!(input1 && input2)}
-        onClick={(e) => {
-          handleLoginData(e);
-        }}
-        buttonName="Signin"
-      />
-
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          className="inputs"
+          placeholder="Email"
+          name="email"
+          type="email"
+          register={register}
+          pattern={!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i}
+        />
+        {errors.email && <p>Please check the Email</p>}
+        <Input
+          className="inputs"
+          placeholder={"Password"}
+          name="password"
+          type="password"
+          register={register}
+          minlength={6}
+        />
+        {errors.password && <p>Please check the Password</p>}
+        <br></br>
+        <Button
+          className="buttonclass"
+          disabled={!isDirty || !isValid}
+          // onClick={(e) => {
+          //   handleLoginData(e);
+          // }}
+          buttonName="Signin"
+          loading={props.loading}
+        />
+      </form>
       <p>
         Don't have an account? <Link to="/signup">Signup here </Link> it takes
         less than a minute

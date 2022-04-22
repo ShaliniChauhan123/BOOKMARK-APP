@@ -1,11 +1,17 @@
 import React from "react";
-
+import "../styles.css";
 const Button = (props) => {
-  const { disabled, buttonName, onClick, className } = props;
+  const { disabled, buttonName, className } = props;
   return (
     <div className={className}>
-      <button disabled={disabled} onClick={onClick}>
-        {buttonName}
+      <button disabled={disabled}>
+        {props.loading ? (
+          <div>
+            loading...<div className="loader"></div>
+          </div>
+        ) : (
+          buttonName
+        )}
       </button>
     </div>
   );

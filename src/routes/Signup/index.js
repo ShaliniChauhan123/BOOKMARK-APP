@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { registerData } from "../../store/actions";
 import { connect } from "react-redux";
@@ -8,28 +9,57 @@ import "../../components/sharedcomponents/styles.css";
 import Button from "../../components/sharedcomponents/Button";
 
 const Signup = (props) => {
-  const [input, setInput] = useState("");
-  const [input1, setInput1] = useState("");
-  const [input2, setInput2] = useState("");
+  const {
+    register,
+    handleSubmit,
+    errors,
+    formState: { isDirty, isValid },
+  } = useForm({ mode: "onChange" });
   const navigate = useNavigate();
-  function handleRegisterData() {
-    props.registerData(input, input1, input2, navigate);
-  }
-  const handleState = (e) => {
-    setInput(e.target.value);
+  const onSubmit = (data) => {
+    props.registerData(data.name, data.email, data.password, navigate);
   };
-  const handleState1 = (e) => {
-    setInput1(e.target.value);
-  };
-  const handleState2 = (e) => {
-    setInput2(e.target.value);
-  };
+
   return (
     <div>
-      <Input
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          className="inputs"
+          placeholder="Name"
+          name="name"
+          type="name"
+          register={register}
+        />
+        <Input
+          className="inputs"
+          placeholder={"Email"}
+          name="email"
+          type="email"
+          register={register}
+        />
+        <Input
+          className="inputs"
+          placeholder={"Password"}
+          name="password"
+          type="password"
+          register={register}
+        />
+
+        <br></br>
+        <Button
+          className="buttonclass"
+          disabled={!isDirty || !isValid}
+          // onClick={(e) => {
+          //   handleLoginData(e);
+          // }}
+          buttonName="Signup"
+          loading={props.loading}
+        />
+      </form>
+      {/* <Input
         className="inputs"
         val={input}
-        placeholder={"Your Name"}
+        placeholder={"Name"}
         onChange={handleState}
       />
       <Input
@@ -50,11 +80,9 @@ const Signup = (props) => {
         disabled={!(input1 && input2)}
         onClick={handleRegisterData}
         buttonName="Submit"
-      />
-      {/* <p>
-        Already have an account?
-        <Link to="/"> Login here </Link>
-      </p> */}
+        loading={props.loading}
+      /> */}
+
       <p>
         Already have an account? <Link to="/">Login here </Link>it takes less
         than a minute
