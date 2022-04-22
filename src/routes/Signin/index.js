@@ -28,7 +28,7 @@ const Signin = (props) => {
           name="email"
           type="email"
           register={register}
-          pattern={!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i}
+          patternval={!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i}
         />
         {errors.email && <p>Please check the Email</p>}
         <Input
@@ -39,14 +39,11 @@ const Signin = (props) => {
           register={register}
           minlength={6}
         />
-        {errors.password && <p>Please check the Password</p>}
+        {errors.password && <p>Please enter minimum 6 characters</p>}
         <br></br>
         <Button
           className="buttonclass"
           disabled={!isDirty || !isValid}
-          // onClick={(e) => {
-          //   handleLoginData(e);
-          // }}
           buttonName="Signin"
           loading={props.loading}
         />

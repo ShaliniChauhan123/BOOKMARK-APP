@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { registerData } from "../../store/actions";
@@ -12,8 +12,7 @@ const Signup = (props) => {
   const {
     register,
     handleSubmit,
-    errors,
-    formState: { isDirty, isValid },
+    formState: { errors, isDirty, isValid },
   } = useForm({ mode: "onChange" });
   const navigate = useNavigate();
   const onSubmit = (data) => {
@@ -29,22 +28,27 @@ const Signup = (props) => {
           name="name"
           type="name"
           register={register}
+          maxlength={10}
         />
+        {errors.name && <p>Maximum 10 letters</p>}
         <Input
           className="inputs"
           placeholder={"Email"}
           name="email"
           type="email"
           register={register}
+          patternval={!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i}
         />
+        {errors.email && <p>Please check the email</p>}
         <Input
           className="inputs"
           placeholder={"Password"}
           name="password"
           type="password"
           register={register}
+          minlength={6}
         />
-
+        {errors.password && <p>Please enter minimum 6 characters</p>}
         <br></br>
         <Button
           className="buttonclass"
