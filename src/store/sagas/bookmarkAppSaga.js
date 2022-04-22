@@ -3,15 +3,10 @@ import { types } from "../actionTypes";
 import { fetchApi } from "../services/api";
 import {
   loginDataSuccess,
-  loginDataFailure,
   registerDataSuccess,
-  registerDataFailure,
   handleme_Success,
-  handleme_Failure,
   handleFolderApi_Success,
-  handleFolderApi_Failure,
   getFoldersApi_Success,
-  getFoldersApi_Failure,
   showAppAlert,
 } from "../actions";
 
