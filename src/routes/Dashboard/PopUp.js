@@ -4,15 +4,22 @@ import Button from "../../components/sharedcomponents/Button";
 import { handleFolderApi } from "../../store/actions";
 import "./popUpstyles.css";
 import Input from "../../components/sharedcomponents/Input";
+import CreatePopUpButton from "./CreatePopUpButton";
 
 const PopUp = (props) => {
+  const [folderApiClick, setFolderApiClick] = useState(false);
+  const [foldername, setFoldername] = useState("");
   const handleClick = () => {
     props.toggle();
   };
   const handleFolderNameChange = (e) => {
     setFoldername(e.target.value);
   };
-  const [foldername, setFoldername] = useState("");
+  const handleFolderApiClick = () => {
+    setFolderApiClick(true);
+    props.handleFolderApi(foldername);
+  };
+
   return (
     <div className="modal">
       <div className="modal_content">
@@ -23,16 +30,25 @@ const PopUp = (props) => {
           <h3>Create Folder</h3>
           <label>
             Folder Name
-            <Input
+            <input
               value={foldername}
               placeholder="Enter Folder Name"
               onChange={handleFolderNameChange}
             />
-            <Button
-              disabled={!foldername}
-              onClick={props.handleFolderApi(foldername)}
-              buttonName="Create"
-            />
+            {/* <CreatePopUpButton
+              foldername={foldername}
+              onClick1={handleFolderApiClick} 
+            /> */}
+            {foldername ? (
+              <button
+                disabled={!foldername}
+                onClick={props.handleFolderApi(foldername)}
+              >
+                Create
+              </button>
+            ) : (
+              <button onClick={handleFolderApiClick}>Create2</button>
+            )}
           </label>
           <br />
         </form>

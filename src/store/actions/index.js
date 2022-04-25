@@ -85,11 +85,10 @@ export function handleme_Failure(error) {
 //     payload: val,
 //   };
 // }
-export function handleFolderApi(val, pid) {
+export function handleFolderApi(val) {
   return {
     type: types.CREATE_FOLDER_API_SEND_REQUEST,
     payload: val,
-    pid: pid,
   };
 }
 export function handleFolderApi_Success(folder) {
