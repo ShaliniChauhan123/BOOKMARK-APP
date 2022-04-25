@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Dashboard = (props) => {
   return <div>THIS IS A DASHBOARD</div>;
