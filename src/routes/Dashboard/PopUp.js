@@ -9,7 +9,7 @@ const PopUp = (props) => {
     register,
     handleSubmit,
 
-    formState: { errors, isDirty, isValid },
+    formState: { isDirty, isValid },
   } = useForm({ mode: "onChange" });
 
   const handleClick = () => {
