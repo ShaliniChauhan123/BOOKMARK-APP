@@ -1,54 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import Button from "../../components/sharedcomponents/Button";
+import { useForm } from "react-hook-form";
 import { handleFolderApi } from "../../store/actions";
 import "./popUpstyles.css";
-import Input from "../../components/sharedcomponents/Input";
-import CreatePopUpButton from "./CreatePopUpButton";
 
 const PopUp = (props) => {
-  const [folderApiClick, setFolderApiClick] = useState(false);
-  const [foldername, setFoldername] = useState("");
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors, isDirty, isValid },
+  } = useForm({ mode: "onChange" });
+
   const handleClick = () => {
     props.toggle();
   };
-  const handleFolderNameChange = (e) => {
-    setFoldername(e.target.value);
-  };
-  const handleFolderApiClick = () => {
-    setFolderApiClick(true);
-    props.handleFolderApi(foldername);
-  };
 
+  const onSubmit = (data) => {
+    console.log("@@@checking", data.foldername);
+    props.handleFolderApi(data.foldername);
+  };
   return (
     <div className="modal">
       <div className="modal_content">
         <span className="close" onClick={handleClick}>
           &times;
         </span>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h3>Create Folder</h3>
           <label>
             Folder Name
             <input
-              value={foldername}
+              name="foldername"
               placeholder="Enter Folder Name"
-              onChange={handleFolderNameChange}
+              type="foldername"
+              {...register("foldername")}
             />
-            {/* <CreatePopUpButton
-              foldername={foldername}
-              onClick1={handleFolderApiClick} 
-            /> */}
-            {foldername ? (
-              <button
-                disabled={!foldername}
-                onClick={props.handleFolderApi(foldername)}
-              >
-                Create
-              </button>
-            ) : (
-              <button onClick={handleFolderApiClick}>Create2</button>
-            )}
+            <button disabled={!isDirty || !isValid}>Create</button>
           </label>
           <br />
         </form>
@@ -56,11 +44,6 @@ const PopUp = (props) => {
     </div>
   );
 };
-// const mapStateToProps = (store) => {
-//   return {
-//     foldername: store.bookmarkAppReducer.foldername,
-//   };
-// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
