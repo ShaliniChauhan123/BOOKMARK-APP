@@ -15,6 +15,7 @@
 a {
   text-decoration: none;
   color: blue;
+  padding-right: 10px;
 }
 a:active {
   color: blue;
@@ -121,11 +122,11 @@ p {
 button:disabled,
 button[disabled] {
   cursor: not-allowed;
-  float: right;
+  /* float: right; */
 
   color: #fff;
   font-size: 16px;
-  padding: 12px 35px;
+  /* padding: 12px 35px; */
   border-radius: 50px;
   display: inline-block;
   border: 0;
@@ -135,9 +136,9 @@ button[disabled] {
 }
 
 button {
-  float: right;
+  /* float: right; */
   cursor: pointer;
-  color: #fff;
+  /* color: #fff; */
   font-size: 16px;
   padding: 12px 20px;
   border-radius: 50px;
@@ -145,7 +146,7 @@ button {
   border: 0;
   outline: 0;
   margin-bottom: 20px;
-  background-image: linear-gradient(135deg, #2b28c6 10%, #2b28c6 100%);
+  /* background-image: linear-gradient(135deg, #2b28c6 10%, #2b28c6 100%); */
 }
 
 .loader {

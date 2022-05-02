@@ -27,16 +27,21 @@ const PopUp = (props) => {
           &times;
         </span>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h3>Create Folder</h3>
+          <div>
+            <h4>Create folder</h4>
+          </div>
+          <div>Folder Name</div>
           <label>
-            Folder Name
             <input
+              className="foldernameinput"
               name="foldername"
               placeholder="Enter Folder Name"
               type="foldername"
               {...register("foldername")}
             />
-            <button disabled={!isDirty || !isValid}>Create</button>
+            <div>
+              <button disabled={!isDirty || !isValid}>Create</button>
+            </div>
           </label>
           <br />
         </form>

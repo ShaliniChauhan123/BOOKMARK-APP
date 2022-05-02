@@ -9,99 +9,102 @@ import {
   getFoldersApi_Success,
   showAppAlert,
 } from "../actions";
+import configObjSaga from "../../utils/configObjSaga";
 
 function* loginRequest(action) {
   try {
-    let configObj = {
-      method: "POST",
-      endpoint: "/login",
-      data: {
-        email: action.payload1,
-        password: action.payload2,
-      },
-    };
-    const user = yield call(fetchApi, configObj);
+    const user = yield call(
+      fetchApi,
+      configObjSaga({
+        method: "POST",
+        endpoint: "/login",
+        data: {
+          email: action.payload1,
+          password: action.payload2,
+        },
+      })
+    );
 
     yield put(loginDataSuccess(user));
     localStorage.setItem("token", user.token);
     action.navigate("/dashboard");
   } catch (error) {
     yield put(showAppAlert(error));
-    //yield put(loginDataFailure(error));
   }
 }
 function* registerRequest(action) {
   try {
-    let configObj = {
-      method: "POST",
-      endpoint: "/register",
-      data: {
-        name: action.payload1,
-        email: action.payload2,
-        password: action.payload3,
-      },
-    };
-    const user = yield call(fetchApi, configObj);
+    const user = yield call(
+      fetchApi,
+      configObjSaga({
+        method: "POST",
+        endpoint: "/register",
+        data: {
+          name: action.payload1,
+          email: action.payload2,
+          password: action.payload3,
+        },
+      })
+    );
     yield put(registerDataSuccess(user));
     localStorage.setItem("token", user.token);
     action.navigate("/dashboard");
   } catch (error) {
     console.log(error);
     yield put(showAppAlert(error));
-    //yield put(registerDataFailure(error));
   }
 }
 
 function* meRequest(action) {
   try {
-    let configObj = {
-      method: "GET",
-      endpoint: "/me",
-      authorization: `Bearer ${localStorage.getItem("token")}`,
-    };
-    const user = yield call(fetchApi, configObj);
+    const user = yield call(
+      fetchApi,
+      configObjSaga({
+        method: "GET",
+        endpoint: "/me",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      })
+    );
     yield put(handleme_Success(user.name));
   } catch (error) {
     console.log(error);
     yield put(showAppAlert(error));
-    //yield put(handleme_Failure(error));
   }
 }
 function* createFolderRequest(action) {
   try {
-    let configObj = {
-      method: "POST",
-      endpoint: "/folder",
-      authorization: `Bearer ${localStorage.getItem("token")}`,
-      data: {
-        name: action.payload,
-        // parentId: action.pid,
-      },
-    };
-    const user = yield call(fetchApi, configObj);
-    console.log("qqqq");
+    const user = yield call(
+      fetchApi,
+      configObjSaga({
+        method: "POST",
+        endpoint: "/folder",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        data: {
+          name: action.payload,
+        },
+      })
+    );
     yield put(handleFolderApi_Success(user));
   } catch (error) {
     console.log(error);
     yield put(showAppAlert(error));
-    //yield put(handleFolderApi_Failure(error));
   }
 }
 function* getFolderRequest(action) {
   try {
-    //let folderid = "81da60eb-bba2-43b2-9cae-7c2e99ce1fb0";
-    let configObj = {
-      method: "GET",
-      endpoint: `/folders`,
-      authorization: `Bearer ${localStorage.getItem("token")}`,
-    };
-    const user = yield call(fetchApi, configObj);
+    const user = yield call(
+      fetchApi,
+      configObjSaga({
+        method: "GET",
+        endpoint: `/folders`,
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      })
+    );
     yield put(getFoldersApi_Success(user));
     console.log("%%%%%", user);
   } catch (error) {
     console.log(error);
     yield put(showAppAlert(error));
-    //yield put(getFoldersApi_Failure(error));
   }
 }
 export function* watchBookmarkAppSaga() {

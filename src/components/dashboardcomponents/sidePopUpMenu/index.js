@@ -15,15 +15,28 @@ const SidePopUpMenu = (props) => {
     setSubFoldermodal(!subFoldermodal);
   };
   return (
-    <div>
-      {props.name}
+    <div key={props.key}>
+      <div className="relative">
+        <div className="folderComponent p-2 flex items-center justify-around cursor-pointer ">
+          <img
+            src="https://bookmarksreact.netlify.app/static/media/closed_folder_arrow.c1d97d5a.svg"
+            alt="folder-arrow"
+          />
 
-      <img
-        className="threedots"
-        onClick={toggleSidePop}
-        src={threedots}
-        alt="threedots"
-      />
+          <img
+            src="https://bookmarksreact.netlify.app/static/media/folder_icon.568ab9fe.svg"
+            alt="folder-icon"
+          />
+          <p className="ml-2 text-gray-500 w-2/3">{props.name}</p>
+          {/* <div className="spacing">{props.name}</div> */}
+          <img
+            className="threedots"
+            onClick={toggleSidePop}
+            src={threedots}
+            alt="threedots"
+          />
+        </div>
+      </div>
       <div className="">
         {sidemodal ? (
           <div className="sidemodal">
