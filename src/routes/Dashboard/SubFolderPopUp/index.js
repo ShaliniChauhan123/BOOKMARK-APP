@@ -14,12 +14,15 @@ const SubFolderPopUp = (props) => {
 
   const handleClick = () => {
     props.toggle();
-    console.log("!!!!");
   };
 
   const onSubmit = (data) => {
-    console.log("@@@checking", data.foldername);
-    //  props.handleFolderApi(data.foldername,props.key);
+    const folderObj = {
+      foldername: data.foldername,
+      pid: props.id,
+    };
+    console.log("@@@checking", data.foldername, props.id);
+    props.handleFolderApi(folderObj);
   };
   return (
     <div className="modal">

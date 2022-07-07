@@ -60,36 +60,13 @@ const Signup = (props) => {
           loading={props.loading}
         />
       </form>
-      {/* <Input
-        className="inputs"
-        val={input}
-        placeholder={"Name"}
-        onChange={handleState}
-      />
-      <Input
-        className="inputs"
-        val={input1}
-        placeholder={"Email address"}
-        onChange={handleState1}
-      />
-      <Input
-        className="inputs"
-        val={input2}
-        placeholder={"Password"}
-        onChange={handleState2}
-      />
-      <br></br>
-      <Button
-        className="buttonclass"
-        disabled={!(input1 && input2)}
-        onClick={handleRegisterData}
-        buttonName="Submit"
-        loading={props.loading}
-      /> */}
 
       <p>
-        Already have an account? <Link to="/">Login here </Link>it takes less
-        than a minute
+        Already have an account?{" "}
+        <Link to="/" className="blue">
+          Login here{" "}
+        </Link>
+        it takes less than a minute
       </p>
     </div>
   );

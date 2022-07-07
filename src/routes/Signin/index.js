@@ -21,7 +21,7 @@ const Signin = (props) => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="formclass" onSubmit={handleSubmit(onSubmit)}>
         <Input
           className="inputs"
           placeholder="Email"
@@ -49,8 +49,11 @@ const Signin = (props) => {
         />
       </form>
       <p>
-        Don't have an account? <Link to="/signup">Signup here </Link> it takes
-        less than a minute
+        Don't have an account?{" "}
+        <Link to="/signup" className="blue">
+          Signup here{" "}
+        </Link>{" "}
+        it takes less than a minute
       </p>
     </div>
   );

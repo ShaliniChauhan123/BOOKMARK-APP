@@ -1,9 +1,13 @@
-import "./styles.css";
-import React from "react";
-import SidePopUpMenu from "../sidePopUpMenu";
-import PopUp from "../../../routes/Dashboard/PopUp";
-const AddLinkPopUp = (props) => {
-  const { toggleAddLink, togglePop, modal } = props;
+import "../dashboardcomponents/AddLinkPopUp/styles.css";
+import React, { useState } from "react";
+import SidePopUpMenu from "../dashboardcomponents/sidePopUpMenu";
+//import PopUp from "../../../routes/Dashboard/PopUp";
+const AddFolder = (props) => {
+  //   const [addLink, setAddLink] = useState(false);
+  const { togglePop, modal } = props;
+  //   const toggleAddLink = () => {
+  //     setAddLink(!addLink);
+  //   };
   return (
     <div
       key={props.id}
@@ -12,13 +16,13 @@ const AddLinkPopUp = (props) => {
       <div className="fixed bg-white w-2/3 h-2/3 top-1/2 left-1/2 transform -translate-x-2/4 -translate-y-2/4 rounded-xl px-10 py-8 flex">
         <div className="w-1/2 p-2 pl-0 mt-5 overflow-auto">
           <div className="text-gray-400 font-bold mb-5 pl-4 pr-5 flex items-center justify-between">
-            <div>SAVE TO</div>
-            <div
+            <div>PARENT FOLDER (IF ANY)</div>
+            {/* <div
               // onClick={togglePop}
               className="text-app-blue border-2 border-solid border-app-blue rounded-md h-5 w-5 font-light hover:bg-app-blue hover:text-white cursor-pointer text-sm flex items-center justify-center"
             >
               +
-            </div>
+            </div> */}
             {/* {modal && <PopUp toggle={togglePop} />} */}
           </div>
           <div className="flex-auto">
@@ -36,26 +40,26 @@ const AddLinkPopUp = (props) => {
 
         <div className="w-1/2 pl-5">
           <div
-            onClick={toggleAddLink}
+            onClick={props.toggleAddLink}
             className="w-full text-right cursor-pointer text-gray-400"
           >
             x
           </div>
-          <h1 className="text-3xl font-semibold">Add Link</h1>
-          <div className="my-5 w-6/7">
-            <h3 className="ml-1 text-gray-500">Link Name</h3>
-            <div className="h-10 w-full">
-              <div className="mainInput w-full h-full rounded-xl">
-                <input
-                  type="text"
-                  placeholder="Enter Name"
-                  className="w-full h-full p-3 rounded-md border-solid border-2 border-gray-200"
-                  //   value=""
-                />
-              </div>
+          <h1 className="text-3xl font-semibold">Create Folder</h1>
+          {/* <div className="my-5 w-6/7">
+            <h3 className="ml-1 text-gray-500">Folder Name</h3> */}
+          <div className="h-10 w-full">
+            <div className="mainInput w-full h-full rounded-xl">
+              <input
+                type="text"
+                placeholder="Enter Name"
+                className="w-full h-full p-3 rounded-md border-solid border-2 border-gray-200"
+                //   value=""
+              />
             </div>
           </div>
-          <div className="my-5 w-6/7">
+          {/* </div> */}
+          {/* <div className="my-5 w-6/7">
             <h3 className="ml-1 text-gray-500">Link URL</h3>
             <div className="h-10 w-full">
               <div className="mainInput w-full h-full rounded-xl">
@@ -67,7 +71,7 @@ const AddLinkPopUp = (props) => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="w-1/2 my-5">
             <div className="mainButton w-full h-full rounded-xl">
               <button
@@ -84,4 +88,4 @@ const AddLinkPopUp = (props) => {
     </div>
   );
 };
-export default AddLinkPopUp;
+export default AddFolder;

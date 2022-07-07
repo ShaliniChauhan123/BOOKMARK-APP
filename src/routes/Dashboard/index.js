@@ -18,9 +18,11 @@ import Button from "../../components/sharedcomponents/Button";
 import AddLinkPopUp from "../../components/dashboardcomponents/AddLinkPopUp";
 
 const Dashboard = (props) => {
+  //const val = { pid: "" };
   useEffect(() => {
     props.handleMeapi();
-    props.getFoldersApi();
+    props.getFoldersApi({ pid: "", folders: props.getfoldersname });
+
     // eslint-disable-next-line
   }, []);
   let { id } = useParams();
@@ -28,15 +30,15 @@ const Dashboard = (props) => {
   const [modal, setModal] = useState(false);
   const [addLink, setAddLink] = useState(false);
   const [leftNav, setLeftNav] = useState(false);
-  const [foldersUnderline, setFoldersUnderline] = useState(false);
+  const [foldersUnderlineFalse, setFoldersUnderlineFalse] = useState(false);
   const [tagsUnderline, setTagsUnderline] = useState(false);
-  const clickFoldersUnderline = () => {
-    setFoldersUnderline(true);
+  const clickFoldersUnderlineFalse = () => {
+    setFoldersUnderlineFalse(false);
     setTagsUnderline(false);
   };
   const clickTagsUnderline = () => {
     setTagsUnderline(true);
-    setFoldersUnderline(false);
+    setFoldersUnderlineFalse(true);
   };
   const togglePop = () => {
     setModal(!modal);
@@ -51,7 +53,7 @@ const Dashboard = (props) => {
   //   setFoldersUnderline(!foldersUnderline);
   // };
   return (
-    <div className={modal ? "noscrolling" : ""}>
+    <div className="fullheight">
       <div className="top">
         <div onClick={handleLeftNav} className="topdiv">
           <svg
@@ -76,28 +78,30 @@ const Dashboard = (props) => {
             className="fixed inset-0 overflow-y-auto z-20 bg-layoutBackground py-4 px-4 w-40 h-full border-r transition duration-500 ease-in-out transform   md:relative md:translate-x-0 
       "
           >
-            {" "}
             <div className="cancel" onClick={handleLeftNav}>
               X
             </div>
             <div className="flex flex-col space-y-3 mt-4 ml-1">
               <LeftNav
-                modal={modal}
-                clickFoldersUnderline={clickFoldersUnderline}
+                // modal={modal}
+                clickFoldersUnderlineFalse={clickFoldersUnderlineFalse}
                 clickTagsUnderline={clickTagsUnderline}
-                foldersUnderline={foldersUnderline}
+                foldersUnderlineFalse={foldersUnderlineFalse}
                 tagsUnderline={tagsUnderline}
+                //togglePop={togglePop}
+                // getfoldersname={props.getfoldersname}
+                showMenu={true}
                 togglePop={togglePop}
-                getfoldersname={props.getfoldersname}
+                toggleAddLink={toggleAddLink}
+                modal={modal}
+                getfolders={props.getfoldersname}
               />
             </div>
           </div>
         ) : (
           <div></div>
         )}
-        <div className="topdiv0">
-          <b>LOGO</b>
-        </div>
+        <div className="topdiv0">LOGO</div>
         <div className="topdiv1">
           <div className={id === "links" ? "underline" : "nounderline"}>
             <Link to={LINKS_ROUTE}>Links</Link>
@@ -117,12 +121,16 @@ const Dashboard = (props) => {
           <h1></h1>
           <LeftNav
             modal={modal}
-            clickFoldersUnderline={clickFoldersUnderline}
+            clickFoldersUnderlineFalse={clickFoldersUnderlineFalse}
             clickTagsUnderline={clickTagsUnderline}
-            foldersUnderline={foldersUnderline}
+            foldersUnderlineFalse={foldersUnderlineFalse}
             tagsUnderline={tagsUnderline}
             togglePop={togglePop}
             getfoldersname={props.getfoldersname}
+            showMenu={true}
+            // addLink={addLink}
+            toggleAddLink={toggleAddLink}
+            // getfolders={props.getfoldersname}
           />
         </div>
         <div className="right1">
@@ -138,6 +146,7 @@ const Dashboard = (props) => {
                         <div className="white">URL</div>
                         <br></br>
                         <input
+                          type="text"
                           className="rounded"
                           placeholder="Url"
                           // onChange={(e) => props.handleInputQuickLink(e.target.value)}
@@ -147,6 +156,7 @@ const Dashboard = (props) => {
                         <div className="white">Folder</div>
                         <br></br>
                         <input
+                          type="text"
                           className="shortrounded"
                           placeholder="Folder"
                           // onChange={(e) => props.handleInputQuickLink(e.target.value)}
@@ -186,11 +196,20 @@ const Dashboard = (props) => {
                       <div className="w-1/4">
                         <div className="mainButton w-full h-full rounded-xl">
                           <button
+                            onClick={toggleAddLink}
                             className="rounded-lg w-full py-2 rounded-3xl border-2 border-solid border-app-blue hover:bg-app-gray"
                             // style="background-color: rgba(0, 0, 0, 0); color: rgb(106, 135, 230);"
                           >
                             + ADD LINK
                           </button>
+                          {addLink && (
+                            <AddLinkPopUp
+                              togglePop={togglePop}
+                              toggleAddLink={toggleAddLink}
+                              modal={modal}
+                              getfolders={props.getfoldersname}
+                            />
+                          )}
                         </div>
                       </div>
                       <div className="w-1/4">
@@ -198,37 +217,57 @@ const Dashboard = (props) => {
                           <div className="gridIcon flex w-1/2 items-center justify-center p-2 rounded-l-lg cursor-pointer bg-app-blue">
                             <div>
                               <img
-                                src="/static/media/grid_icon.8e08b02e.svg"
+                                src="https://bookmarksreact.netlify.app/static/media/grid_icon.8e08b02e.svg"
                                 alt="gridicon"
                                 className="my-1 mr-1"
                               />
                               <img
-                                src="/static/media/grid_icon.8e08b02e.svg"
+                                src="https://bookmarksreact.netlify.app/static/media/grid_icon.8e08b02e.svg"
                                 alt="gridicon"
                                 className="my-1 "
                               />
                             </div>
                             <div>
                               <img
-                                src="/static/media/grid_icon.8e08b02e.svg"
+                                src="https://bookmarksreact.netlify.app/static/media/grid_icon.8e08b02e.svg"
                                 alt="gridicon"
                                 className="my-1 mr-1"
                               />
                               <img
-                                src="/static/media/grid_icon.8e08b02e.svg"
+                                src="https://bookmarksreact.netlify.app/static/media/grid_icon.8e08b02e.svg"
                                 alt="gridicon"
                                 className="my-1"
                               />
                             </div>
                           </div>
-                          <div className="listIcon flex items-center justify-center w-1/2 h-full p-3 rounded-r-lg cursor-pointer ">
+                          {/* <div className="listIcon flex items-center justify-center w-1/2 h-full p-3 rounded-r-lg cursor-pointer ">
                             <img
-                              src="/static/media/list_icon.3e833105.svg"
+                              src="https://bookmarksreact.netlify.app/static/media/list_icon.3e833105.svg"
                               alt="listicon"
                               className="ml-1"
                             />
-                          </div>
+                          </div> */}
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-1 flex-auto">
+                    <div className="h-full w-full">
+                      <div className="emptyBookmarkList w-full h-full flex flex-col items-center justify-center">
+                        <div className="w-14 h-14">
+                          <img
+                            src="https://bookmarksreact.netlify.app/static/media/no_bookmark_icon.e3b9fa21.svg  "
+                            alt="noBookmarks"
+                            className="w-full h-full"
+                          />
+                        </div>
+                        <h1 className="font-extralight text-lg mt-5 mb-1">
+                          No Bookmarks Found
+                        </h1>
+                        <h2 className="text-gray-500 text-center">
+                          Keep content organized with <br /> folders &amp;
+                          subfolders
+                        </h2>
                       </div>
                     </div>
                   </div>
@@ -247,6 +286,7 @@ const mapStateToProps = (store) => {
   return {
     name: store.bookmarkAppReducer.name,
     getfoldersname: store.bookmarkAppReducer.getfolders,
+    //  openfolder: store.bookmarkAppReducer.openfolder,
   };
 };
 
@@ -255,8 +295,8 @@ const mapDispatchToProps = (dispatch) => {
     handleMeapi: () => {
       dispatch(handleMeapi());
     },
-    getFoldersApi: () => {
-      dispatch(getFoldersApi());
+    getFoldersApi: (val) => {
+      dispatch(getFoldersApi(val));
     },
   };
 };

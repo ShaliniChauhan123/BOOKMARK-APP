@@ -4,7 +4,7 @@ const Button = (props) => {
   const { disabled, buttonName, className } = props;
   return (
     <div className={className}>
-      <button disabled={disabled}>
+      <button disabled={disabled} className="activebutton">
         {props.loading ? (
           <div>
             loading...<div className="loader"></div>

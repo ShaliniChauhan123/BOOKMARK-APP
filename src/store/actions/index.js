@@ -103,15 +103,23 @@ export function handleFolderApi_Failure(error) {
     error: error,
   };
 }
-export function getFoldersApi() {
+export function getFoldersApi(val) {
   return {
     type: types.GET_FOLDERS_API_SEND_REQUEST,
+    payload: val,
   };
 }
 export function getFoldersApi_Success(user) {
   return {
     type: types.GET_FOLDERS_API_SUCCESS,
     payload: user,
+  };
+}
+export function getFoldersApi_Success1(user, pid) {
+  return {
+    type: types.GET_FOLDERS_API_SUCCESS1,
+    payload1: user,
+    payload2: pid,
   };
 }
 export function getFoldersApi_Failure(error) {
@@ -121,10 +129,34 @@ export function getFoldersApi_Failure(error) {
     error: error,
   };
 }
+export function getRenameApi(val) {
+  return {
+    type: types.GET_RENAME_API,
+    payload: val,
+  };
+}
+export function getRenameApi_Success(val) {
+  return {
+    type: types.GET_RENAME_API_SUCCESS,
+    error: val,
+  };
+}
+export function getRenameApi_Failure(val) {
+  return {
+    type: types.GET_RENAME_API_FAILURE,
+    payload: val,
+  };
+}
 export function showAppAlert(error) {
   return {
     type: types.SHOW_ALERT,
     payload: {},
     message: error,
+  };
+}
+export function openFolderAction(val) {
+  return {
+    type: types.OPEN_FOLDER_ACTION,
+    payload: val,
   };
 }

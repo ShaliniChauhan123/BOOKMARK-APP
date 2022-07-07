@@ -17,8 +17,8 @@ const PopUp = (props) => {
   };
 
   const onSubmit = (data) => {
-    console.log("@@@checking", data.foldername);
-    props.handleFolderApi(data.foldername);
+    console.log("@@@checking", data);
+    props.handleFolderApi(data);
   };
   return (
     <div className="modal">

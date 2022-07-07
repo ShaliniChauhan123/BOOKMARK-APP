@@ -1,22 +1,35 @@
+import React, { useState } from "react";
 import "../../routes/Dashboard/styles.css";
 import { Link } from "react-router-dom";
 import PopUp from "../../routes/Dashboard/PopUp";
 import SidePopUpMenu from "../dashboardcomponents/sidePopUpMenu";
+import AddLinkPopUp from "../dashboardcomponents/AddLinkPopUp";
+import AddFolder from "../AddFolder";
+import { connect } from "react-redux";
 const LeftNav = (props) => {
   const {
-    clickFoldersUnderline,
+    clickFoldersUnderlineFalse,
     clickTagsUnderline,
     tagsUnderline,
-    foldersUnderline,
+    foldersUnderlineFalse,
     modal,
     togglePop,
     getfoldersname,
   } = props;
+  const [anchorEl, setAnchorEl] = useState(false);
+
+  const handleClose = () => {
+    setAnchorEl(!anchorEl);
+  };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   return (
     <div>
       <li className="sidenav2">
         <Link to="/projects">
-          <button>All Projects</button>
+          <button className="projectsButton">All Projects</button>
         </Link>
       </li>
       <li className="sidenav2">
@@ -26,58 +39,94 @@ const LeftNav = (props) => {
         <Link to="/favourites">Favourites</Link>
       </li>
       <li className="sidenav2">
-        <div>
-          <a
-            className={foldersUnderline ? "underline" : "nounderline"}
-            onClick={clickFoldersUnderline}
-          >
-            Folders
-          </a>
-
-          <a
-            className={tagsUnderline ? "underline" : "nounderline"}
-            onClick={clickTagsUnderline}
-          >
-            Tags
-          </a>
+        <div
+          className={
+            foldersUnderlineFalse ? "nounderline" : "underlineForFolders"
+          }
+          onClick={clickFoldersUnderlineFalse}
+        >
+          Folders
+        </div>
+        <div
+          className={tagsUnderline ? "underlineForTags" : "nounderline"}
+          onClick={clickTagsUnderline}
+        >
+          Tags
         </div>
       </li>
 
-      {foldersUnderline ? (
+      {foldersUnderlineFalse ? (
+        <div></div>
+      ) : (
         <div>
-          <li className="sidenav2">
-            <form className="nosubmit">
-              <input
-                className="nosubmit"
-                type="search"
-                placeholder="Search..."
-              ></input>
-            </form>
+          <div className="sidenav2">
+            <div className="foldersdown">
+              <form className="nosubmit">
+                <input
+                  className="nosubmit"
+                  type="search"
+                  placeholder="Search..."
+                ></input>
+              </form>
+            </div>
+
             {/* <img src={search} alt="search" /> */}
-            <button className="plusButton" disabled={modal} onClick={togglePop}>
-              +
-            </button>
+            <div className="tagsdown">
+              {" "}
+              <button
+                className="plusButton"
+                disabled={modal}
+                onClick={togglePop}
+              >
+                +
+              </button>
+            </div>
+
             {/* +
                 </button> */}
-            {modal && <PopUp toggle={togglePop} />}
-          </li>
-          <li className="scrollinglist">
-            <br></br>
-            {props.name}
-            <div className="modal1">
-              {getfoldersname.map((i) => (
-                <div key={i.id} className="modal11">
-                  <SidePopUpMenu name={i.name} key={i.id} />
+            {modal && (
+              <AddFolder
+                togglePop={togglePop}
+                toggleAddLink={props.toggleAddLink}
+                modal={modal}
+                getfolders={getfoldersname}
+              />
+            )}
+          </div>
+
+          <br></br>
+          <div className="folderList p-2 flex-auto overflow-auto">
+            {console.log("getfolders", props.getfolders)}
+            {props.getfolders != null ? (
+              props.getfolders.map((i) => (
+                <div key={i.id} className="folders flex-col">
+                  <SidePopUpMenu
+                    name={i.name}
+                    id={i.id}
+                    array={i}
+                    showMenu={true}
+                    anchorEl={anchorEl}
+                    handleClose={handleClose}
+                    handleClick={handleClick}
+                  />
                 </div>
-              ))}
-            </div>
-          </li>
+              ))
+            ) : (
+              <div className="loader"></div>
+            )}
+          </div>
+          {/* </li> */}
         </div>
-      ) : (
-        <div></div>
       )}
     </div>
   );
 };
+const mapStateToProps = (store) => {
+  return {
+    getfolders: store.bookmarkAppReducer.getfolders,
+    //getfoldersname: store.bookmarkAppReducer.getfolders,
+  };
+};
+export default connect(mapStateToProps, null)(LeftNav);
 
-export default LeftNav;
+//export default LeftNav;
